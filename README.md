@@ -3,22 +3,64 @@ It is a full stack implementation of this powerful Neural Network-based methods 
 The motivation for this implementation came around 2014-2015 since there were no available `fast` and `flexible` implementation of this nice method in C/C++.
 I made it relatively simple and scalable with a possibiliy to adjust many parameters. 
 
+
 ## Project files
 include/SelfOrganizingMaps.h - library class definition
 src/SelfOrganizingMaps.cpp - functions implementation
 tests/test_SelfOrganizingMaps.cpp - extensive demonstration of functionality and relevant examples
 iris.txt - test data
 
+
 ## Examples of usage
+Tests file include following functionality:
+1. Reading input training data
+2. Covariance matrix calculation
+3. Solution of improper Inversed Covariance matrix - Tikhonov regularization
+4. Pearson Correlation
+5. Eigen decomposition
+6. Extracting 1st and 2nd eigenvalues by ordering values
+7. Calculation of optimal SOM size (height,width): "rule of thumb"; Vessanto method and Shalaginov method (check reference in the end of this document)
+8. Self Organizing Map training and Best Maching Unit (BMU) calculation
+9. Output of the trained groups per SOM node
 
 
-### Data processing
-Covariance matrix calculation
-Solution of improper Inversed Covariance matrix - Tikhonov regularization
+## Library API
 
-### SOM size calulation
+```c
+//SOM Object initialization
+neuralnetworks::SelfOrganizingMaps obj(numFeatures, height, width);
 
-### SOM Training and Best Maching Unit (BMU) calculation
+//Pusing training data to the SOM class object
+obj.trainingData.swap(trainingData);
+
+//Weight initialization
+obj.weightsInitialization(0.1, 0.5);
+
+//SOM training
+obj.somTraining(size, 0.1);
+
+// Trained model resuls in obj.assignedNode(i, j) objects of SOM node (i,j):
+std::map<unsigned int, unsigned int >::iterator it;
+for (unsigned int i = 0; i < height; i++) {
+    for (unsigned int j = 0; j < width; j++) {
+        unsigned int cl0 = 0, cl1 = 0;
+        printf("SOM node (%d,%d). IDs of elements: ", i, j);
+        for (it = obj.assignedNode(i, j).begin(); it != obj.assignedNode(i, j).end(); it++) {
+            printf("%d ", it->first);
+        }
+        printf("\n");
+    }
+}
+/** API documentation of this object
+* 3d matrix that corresponds to lattice of the training data that assigned to specific nodes in SOM. \n
+* Indexes: 1st - height, 2nd - width, 3rd - map of IDs of assigned training data, ordered in std::map to avoid repetitions
+*/
+//boost::numeric::ublas::matrix<std::map<unsigned int, unsigned int > > assignedNode;
+     
+```
+
+
+## Output example on Iris dataset
 
 
 ## Building and test (with working example)

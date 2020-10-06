@@ -130,7 +130,7 @@ namespace neuralnetworks {
 
         /**
          * 3d matrix that corresponds to lattice of the training data that assigned to specific nodes in SOM. \n
-         * Indexes: 1st - height, 2nd - width, 3rd - map of ids of assigned training data, ordered in std::map to avoid repetitions
+         * Indexes: 1st - height, 2nd - width, 3rd - map of IDs of assigned training data, ordered in std::map to avoid repetitions
          */
         boost::numeric::ublas::matrix<std::map<unsigned int, unsigned int > > assignedNode;
 
