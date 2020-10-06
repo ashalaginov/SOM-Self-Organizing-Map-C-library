@@ -5,10 +5,10 @@ I made it relatively simple and scalable with a possibiliy to adjust many parame
 
 
 ## Project files
-include/SelfOrganizingMaps.h - library class definition
-src/SelfOrganizingMaps.cpp - functions implementation
-tests/test_SelfOrganizingMaps.cpp - extensive demonstration of functionality and relevant examples
-iris.txt - test data
+* include/SelfOrganizingMaps.h - library class definition
+* src/SelfOrganizingMaps.cpp - functions implementation
+* tests/test_SelfOrganizingMaps.cpp - extensive demonstration of functionality and relevant examples
+* iris.txt - test data
 
 
 ## Examples of usage
@@ -43,7 +43,6 @@ obj.somTraining(size, 0.1);
 std::map<unsigned int, unsigned int >::iterator it;
 for (unsigned int i = 0; i < height; i++) {
     for (unsigned int j = 0; j < width; j++) {
-        unsigned int cl0 = 0, cl1 = 0;
         printf("SOM node (%d,%d). IDs of elements: ", i, j);
         for (it = obj.assignedNode(i, j).begin(); it != obj.assignedNode(i, j).end(); it++) {
             printf("%d ", it->first);
@@ -51,16 +50,86 @@ for (unsigned int i = 0; i < height; i++) {
         printf("\n");
     }
 }
-/** API documentation of this object
+/** API definition of the contained with trained data - list of input data IDs per SOM node
 * 3d matrix that corresponds to lattice of the training data that assigned to specific nodes in SOM. \n
 * Indexes: 1st - height, 2nd - width, 3rd - map of IDs of assigned training data, ordered in std::map to avoid repetitions
 */
-//boost::numeric::ublas::matrix<std::map<unsigned int, unsigned int > > assignedNode;
+boost::numeric::ublas::matrix<std::map<unsigned int, unsigned int > > assignedNode;
      
 ```
 
 
 ## Output example on Iris dataset
+```bash
+Tue Oct  6 15:15:10 2020
+1601990110 seconds since the start of the Age :)
+OMP threads 6 
+Eigen threads 6
+Program threads 6
+iris.txt
+Training Data Container Size: 150
+Max Training Data Container Capacity: 256
+Max Size of Training Data Container: 384307168202282325
+
+Covariance Matrix:
+  0.681122 -0.0390067    1.26519   0.513458
+-0.0390067   0.186751  -0.319568  -0.117195
+   1.26519  -0.319568    3.09242    1.28774
+  0.513458  -0.117195    1.28774   0.578532
+
+Pearson Matrix:
+        1 -0.109369  0.871753  0.817952
+-0.109369         1 -0.420515 -0.356543
+ 0.871753 -0.420515         1  0.962756
+ 0.817952 -0.356543  0.962756         1
+
+Eigenvalues Matrix:
+  2.91082         0         0         0
+        0  0.147355         0         0
+        0         0  0.921221         0
+        0         0         0 0.0206086
+
+E0 = 2.910815 E1= 0.921221 
+ 
+Proposed : 25
+Avg Pearson correlation: 0.589815
+Rule of thumb : 61.2372
+Vesanto : 193.493
+Vesanto lower : 48.3734
+Vesanto upper : 773.974
+SOM final weight : 5
+SOM final height : 5
+SOM Object initialization...done
+
+Train data written to SOM object
+SOM Weights initialization...done
+SOM Training...done
+SOM node (0,0). IDs of elements: 76 77 106 111 113 115 120 121 122 124 127 128 129 133 134 135 138 140 141 143 144 145 149 
+SOM node (0,1). IDs of elements: 13 32 40 46 50 51 56 61 65 67 75 77 78 86 88 90 91 102 104 105 107 108 110 112 120 134 136 137 138 139 144 147 
+SOM node (0,2). IDs of elements: 61 
+SOM node (0,3). IDs of elements: 
+SOM node (0,4). IDs of elements: 
+SOM node (1,0). IDs of elements: 70 113 127 146 
+SOM node (1,1). IDs of elements: 78 85 91 97 138 
+SOM node (1,2). IDs of elements: 92 93 
+SOM node (1,3). IDs of elements: 30 49 
+SOM node (1,4). IDs of elements: 18 
+SOM node (2,0). IDs of elements: 55 68 78 81 84 
+SOM node (2,1). IDs of elements: 88 96 99 
+SOM node (2,2). IDs of elements: 
+SOM node (2,3). IDs of elements: 45 
+SOM node (2,4). IDs of elements: 0 1 3 5 7 11 12 14 16 19 22 24 25 30 31 32 33 34 44 46 47 49 
+SOM node (3,0). IDs of elements: 53 59 80 92 106 
+SOM node (3,1). IDs of elements: 64 
+SOM node (3,2). IDs of elements: 
+SOM node (3,3). IDs of elements: 
+SOM node (3,4). IDs of elements: 1 2 3 6 8 12 13 22 34 42 45 
+SOM node (4,0). IDs of elements: 
+SOM node (4,1). IDs of elements: 60 
+SOM node (4,2). IDs of elements: 
+SOM node (4,3). IDs of elements: 
+SOM node (4,4). IDs of elements: 41 
+```
 
 
 ## Building and test (with working example)

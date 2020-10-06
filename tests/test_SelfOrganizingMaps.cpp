@@ -166,8 +166,8 @@ void test1() {
 
         //Proposed optimal size of SOM
         Sproposed = Smin + (Smax - Smin) * alpha;
-        std::cout << "\n Proposed :\n" << Sproposed << std::endl;
-        std::cout << "\n Avg Pearson :\n" << (correlation.array().abs().sum() - (double) numFeatures) / (double) (numFeatures * numFeatures - numFeatures) << std::endl;
+        std::cout << "\nProposed : " << Sproposed << std::endl;
+        std::cout << "\nAvg Pearson correlation: " << (correlation.array().abs().sum() - (double) numFeatures) / (double) (numFeatures * numFeatures - numFeatures) << std::endl;
 
         Sv = 5 * sqrt(size) * E[0] / E[1];
         Svlower = 0.25 * Sv;
@@ -175,17 +175,17 @@ void test1() {
 
         Sthumbrule = 5 * sqrt(size);
 
-        std::cout << "\n Rule of thumb :\n" << Sthumbrule << std::endl;
-        std::cout << "\n Vesanto :\n" << Sv << std::endl;
-        std::cout << "\n Vesanto lower :\n" << Svlower << std::endl;
-        std::cout << "\n Vesanto upper :\n" << Svupper << std::endl;
+        std::cout << "\nRule of thumb : " << Sthumbrule << std::endl;
+        std::cout << "\nVesanto : " << Sv << std::endl;
+        std::cout << "\nVesanto lower : " << Svlower << std::endl;
+        std::cout << "\nVesanto upper : " << Svupper << std::endl;
 
         double S = Sproposed; //SELECTION OF SOM SIZE CALCULATION METHOD: Sv - Vesanto, Sproposed - proposed methods, Sthumbrule - "rule of thumb". Check references
 
         height = ceil(sqrt(S));
         width = floor(S / height);
-        std::cout << "\n weight :\n" << width << std::endl;
-        std::cout << "\n height :\n" << height << std::endl;
+        std::cout << "\nSOM final weight : " << width << std::endl;
+        std::cout << "\nSOM final height : " << height << std::endl;
 
         //free
         tmpObservations.resize(0, 0);
